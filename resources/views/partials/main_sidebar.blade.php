@@ -41,7 +41,7 @@
                         <li class="nav-item">
                             <a href="{{route('course.index')}}" class="nav-link">
                                 <i class="fas fa-book"></i>
-                                <p>HR Manage Courses</p>
+                                <p>HR Manage Course</p>
                             </a>
                         </li>
                         <li class="nav-item">
