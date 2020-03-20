@@ -18,5 +18,7 @@ Route::group(['namespace' => 'HR', 'middleware' => 'role:hr'], function () {
         Route::resource('role', 'RoleController');
         Route::resource('permission', 'PermissionController');
 
+        //course routes
+        Route::resource('course','CourseController');
     });
 });

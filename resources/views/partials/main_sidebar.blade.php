@@ -39,9 +39,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('course.index')}}" class="nav-link">
                                 <i class="fas fa-book"></i>
-                                <p>HR Manage Course</p>
+                                <p>HR Manage Courses</p>
                             </a>
                         </li>
                         <li class="nav-item">
