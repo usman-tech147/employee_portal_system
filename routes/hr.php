@@ -20,5 +20,6 @@ Route::group(['namespace' => 'HR', 'middleware' => 'role:hr'], function () {
 
         //course routes
         Route::resource('course','CourseController');
+        Route::get('course/all/programs','CourseController@getAllPrograms')->name('course.all.program');
     });
 });
