@@ -107,8 +107,7 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    html = '<select name="program" id="program" class="form-control">\n' +
-                        '                                <option value="default">Select Program</option>\n' +
+                    html = '<select name="program" id="program" class="form-control custom-select" multiple>\n' +
                         '                                ' + data.data + ' \n' +
                         '                            </select>';
                     $('#program').html(html);
@@ -129,12 +128,12 @@
         /**
          * POST and PATCH REQUEST FOR COURSE DETAIL
          * **/
-        $('#course_assessment_form').submit(function (e) {
+        $('#course_form').submit(function (e) {
 
             if ($('.action').attr('id') == 'store') {
-                data = new FormData(this);
+                // data = new FormData(this);
                 $.ajax({
-                    url: '{{route('course_assessments.store')}}',
+                    url: '{{route('course.store')}}',
                     method: 'POST',
                     data: new FormData(this),
                     contentType: false,
@@ -142,9 +141,10 @@
                     processData: false,
                     datatype: 'json',
                     success: function (data) {
-                        $('#course_assessment_modal form').find('.invalid-feedback').remove();
-                        $('#course_assessment_modal form').find('.form-control').removeClass('is-invalid');
+                        $('#course_modal form').find('.invalid-feedback').remove();
+                        $('#course_modal form').find('.form-control').removeClass('is-invalid');
                         if (data.errors) {
+                            console.log(data.errors);
                             $.each(data.errors, function (key, value) {
                                 $('#' + key)
                                     .addClass('is-invalid')
@@ -153,12 +153,12 @@
                                         '</strong></div>');
                             });
                         }
-                        if (data.success) {
-                            $('#course_assessment_form')[0].reset();
-                            $('#course_assessment_modal').modal('hide');
+                        if (data.request) {
+                            $('#course_form')[0].reset();
+                            $('#course_modal').modal('hide');
                             html = '<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>' + data.success + '</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
                             $('#message').html(html);
-                            $('#course_assessment').DataTable().ajax.reload();
+                            // $('#course_assessment').DataTable().ajax.reload();
                         }
                     },
                     error: function (jqxhr, status, exception) {
@@ -166,118 +166,120 @@
                     }
                 });
             }
-            if ($('.action').attr('id') == 'updation') {
-                var c_id = $('#hidden_id').val();
-                var url = '{{route('course_assessments.update',":c_id")}}';
-                url = url.replace(':c_id', c_id);
-                var formdata = new FormData(this);
-                formdata.set('_method', 'PATCH');
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: formdata,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    datatype: 'json',
-                    success: function (data) {
-                        $('#course_assessment_modal form').find('.invalid-feedback').remove();
-                        $('#course_assessment_modal form').find('.form-control').removeClass('is-invalid');
-                        if (data.errors) {
-                            $.each(data.errors, function (key, value) {
-                                $('#' + key)
-                                    .addClass('is-invalid')
-                                    .after('<div class="invalid-feedback text-"><strong>'
-                                        + value +
-                                        '</strong></div>');
-                            });
-                        }
-                        if (data.success) {
-                            $('#course_assessment_form')[0].reset();
-                            $('#course_assessment_modal').modal('hide');
-                            html = '<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>' + data.success + '</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-                            $('#message').html(html);
-                            $('#course_assessment').DataTable().ajax.reload();
-                        }
-                    },
-                    error: function (jqxhr, status, exception) {
-                        alert('Exception:', exception);
-                    }
-                });
-            }
+            {{--if ($('.action').attr('id') == 'updation') {--}}
+                {{--var c_id = $('#hidden_id').val();--}}
+                {{--var url = '{{route('course_assessments.update',":c_id")}}';--}}
+                {{--url = url.replace(':c_id', c_id);--}}
+                {{--var formdata = new FormData(this);--}}
+                {{--formdata.set('_method', 'PATCH');--}}
+                {{--$.ajax({--}}
+                    {{--url: url,--}}
+                    {{--type: 'POST',--}}
+                    {{--data: formdata,--}}
+                    {{--contentType: false,--}}
+                    {{--cache: false,--}}
+                    {{--processData: false,--}}
+                    {{--datatype: 'json',--}}
+                    {{--success: function (data) {--}}
+                        {{--$('#course_assessment_modal form').find('.invalid-feedback').remove();--}}
+                        {{--$('#course_assessment_modal form').find('.form-control').removeClass('is-invalid');--}}
+                        {{--if (data.errors) {--}}
+                            {{--$.each(data.errors, function (key, value) {--}}
+                                {{--$('#' + key)--}}
+                                    {{--.addClass('is-invalid')--}}
+                                    {{--.after('<div class="invalid-feedback text-"><strong>'--}}
+                                        {{--+ value +--}}
+                                        {{--'</strong></div>');--}}
+                            {{--});--}}
+                        {{--}--}}
+                        {{--if (data.success) {--}}
+                            {{--$('#course_assessment_form')[0].reset();--}}
+                            {{--$('#course_assessment_modal').modal('hide');--}}
+                            {{--html = '<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>' + data.success + '</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';--}}
+                            {{--$('#message').html(html);--}}
+                            {{--$('#course_assessment').DataTable().ajax.reload();--}}
+                        {{--}--}}
+                    {{--},--}}
+                    {{--error: function (jqxhr, status, exception) {--}}
+                        {{--alert('Exception:', exception);--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--}--}}
+
+
             e.preventDefault();
         });
 
         /**
          * GET REQUEST FOR EDIT COURSE DETAIL RECORD
          * **/
-        function editCourseAssessmet(id) {
-            $('#course_assessment_form')[0].reset();
-            $('#course_assessment_modal form').find('.invalid-feedback').remove();
-            $('#course_assessment_modal form').find('.form-control').removeClass('is-invalid');
-            var c_id = id;
-            var url = '{{route('course_assessments.edit',":c_id")}}';
-            url = url.replace(':c_id', c_id);
-            $.ajax({
-                url: url,
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    $('#modal-title').text('Edit Course Assessment');
-                    $('#course_assessment_modal').modal('show');
-                    $('.action').attr('id', 'updation');
-                    $('.action').text('Update Record');
-                    $('#course_level').val(data.course_level);
-                    $('#program').val(data.program);
-                    $('#course_title').val(data.course_title);
-                    $('#course_code').val(data.course_code);
-                    $('#semester').val(data.semester);
-                    $('#final_result_submission').val(data.final_result_submission);
-                    $('#moodle_usage_status').val(data.moodle_usage_status);
-                    $('#hidden_id').val(data.id);
-                },
-                error: function (jqxhr, status, exception) {
-                    alert('Exception:', exception);
-                }
-            });
-        }
+        {{--function editCourseAssessmet(id) {--}}
+            {{--$('#course_assessment_form')[0].reset();--}}
+            {{--$('#course_assessment_modal form').find('.invalid-feedback').remove();--}}
+            {{--$('#course_assessment_modal form').find('.form-control').removeClass('is-invalid');--}}
+            {{--var c_id = id;--}}
+            {{--var url = '{{route('course_assessments.edit',":c_id")}}';--}}
+            {{--url = url.replace(':c_id', c_id);--}}
+            {{--$.ajax({--}}
+                {{--url: url,--}}
+                {{--type: 'GET',--}}
+                {{--dataType: 'json',--}}
+                {{--success: function (data) {--}}
+                    {{--$('#modal-title').text('Edit Course Assessment');--}}
+                    {{--$('#course_assessment_modal').modal('show');--}}
+                    {{--$('.action').attr('id', 'updation');--}}
+                    {{--$('.action').text('Update Record');--}}
+                    {{--$('#course_level').val(data.course_level);--}}
+                    {{--$('#program').val(data.program);--}}
+                    {{--$('#course_title').val(data.course_title);--}}
+                    {{--$('#course_code').val(data.course_code);--}}
+                    {{--$('#semester').val(data.semester);--}}
+                    {{--$('#final_result_submission').val(data.final_result_submission);--}}
+                    {{--$('#moodle_usage_status').val(data.moodle_usage_status);--}}
+                    {{--$('#hidden_id').val(data.id);--}}
+                {{--},--}}
+                {{--error: function (jqxhr, status, exception) {--}}
+                    {{--alert('Exception:', exception);--}}
+                {{--}--}}
+            {{--});--}}
+        {{--}--}}
 
 
         /**
          * DELETE COURSE DETAIL MODAL POP UP
          * **/
-        function deleteCourseAssessmet(id) {
-            $('#confirmModel').modal('show');
-            $('#del').val(id);
-            // $('.modal-title').text('CONFIRMATION');
-        }
+        // function deleteCourseAssessmet(id) {
+        //     $('#confirmModel').modal('show');
+        //     $('#del').val(id);
+        //     // $('.modal-title').text('CONFIRMATION');
+        // }
 
         /**
          * DELETE REQUEST FOR COURSE DETAIL
          * **/
-        function deleteData() {
-            var id = $('#del').val();
-            var token = $("meta[name='csrf-token']").attr("content");
+        {{--function deleteData() {--}}
+            {{--var id = $('#del').val();--}}
+            {{--var token = $("meta[name='csrf-token']").attr("content");--}}
 
-            var c_id = id;
-            var url = '{{route('course_assessments.destroy',":c_id")}}';
-            url = url.replace(':c_id', c_id);
-            $.ajax(
-                {
-                    url: url,
-                    type: 'DELETE',
-                    data: {
-                        "id": id,
-                        "_token": token,
-                    },
-                    success: function (data) {
-                        $('#confirmModel').modal('hide');
-                        html = '<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>' + data.success + '</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-                        $('#message').html(html);
-                        $('#course_assessment').DataTable().ajax.reload();
-                    }
-                });
-        }
+            {{--var c_id = id;--}}
+            {{--var url = '{{route('course_assessments.destroy',":c_id")}}';--}}
+            {{--url = url.replace(':c_id', c_id);--}}
+            {{--$.ajax(--}}
+                {{--{--}}
+                    {{--url: url,--}}
+                    {{--type: 'DELETE',--}}
+                    {{--data: {--}}
+                        {{--"id": id,--}}
+                        {{--"_token": token,--}}
+                    {{--},--}}
+                    {{--success: function (data) {--}}
+                        {{--$('#confirmModel').modal('hide');--}}
+                        {{--html = '<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>' + data.success + '</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';--}}
+                        {{--$('#message').html(html);--}}
+                        {{--$('#course_assessment').DataTable().ajax.reload();--}}
+                    {{--}--}}
+                {{--});--}}
+        {{--}--}}
 
     </script>
 @endsection

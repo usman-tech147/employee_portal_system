@@ -10,4 +10,8 @@ class Program extends Model
     {
         return $this->belongsToMany(CourseLevel::class);
     }
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class)->withPivot('course_id');
+    }
 }

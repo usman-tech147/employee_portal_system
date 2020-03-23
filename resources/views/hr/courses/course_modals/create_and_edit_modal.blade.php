@@ -26,7 +26,8 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="program">Program</label>
-                            <select id="program" name="program" class="form-control">
+                            <select id="program" size="4" name="programs[]" class="form-control custom-select"
+                                    multiple>
                             </select>
                         </div>
                     </div>
