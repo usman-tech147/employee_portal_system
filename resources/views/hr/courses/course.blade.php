@@ -47,55 +47,39 @@
         /**
          * GET REQUEST FOR COURSES
          * **/
-        {{--$('#course_assessment').DataTable({--}}
-        {{--processing: true,--}}
-        {{--serverSide: true,--}}
-        {{--responsive: true,--}}
-        {{--autoWidth: false,--}}
-        {{--ajax: {--}}
-        {{--url: '{{route('all.courses.assessments')}}',--}}
-        {{--},--}}
-        {{--columns: [--}}
-        {{--{--}}
-        {{--data: 'id',--}}
-        {{--name: 'id'--}}
-        {{--},--}}
-        {{--{--}}
-        {{--data: 'course_level',--}}
-        {{--name: 'course_level'--}}
-        {{--},--}}
-        {{--{--}}
-        {{--data: 'program',--}}
-        {{--name: 'program'--}}
-        {{--},--}}
-        {{--{--}}
-        {{--data: 'course_title',--}}
-        {{--name: 'course_title'--}}
-        {{--},--}}
-        {{--{--}}
-        {{--data: 'course_code',--}}
-        {{--name: 'course_code'--}}
-        {{--},--}}
-        {{--{--}}
-        {{--data: 'semester',--}}
-        {{--name: 'semester'--}}
-        {{--},--}}
-        {{--{--}}
-        {{--data: 'final_result_submission',--}}
-        {{--name: 'final_result_submission',--}}
-        {{--},--}}
-        {{--{--}}
-        {{--data: 'moodle_usage_status',--}}
-        {{--name: 'moodle_usage_status'--}}
-        {{--},--}}
-        {{--{--}}
-        {{--data: 'action',--}}
-        {{--name: 'action',--}}
-        {{--orderable: false,--}}
-        {{--searchable: false--}}
-        {{--},--}}
-        {{--]--}}
-        {{--});--}}
+        $('#course').DataTable({
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            autoWidth: false,
+            ajax: {
+                url: '{{route('all.courses')}}',
+            },
+            columns: [
+                {
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'course_name',
+                    name: 'course_name'
+                },
+                {
+                    data: 'program',
+                    name: 'program'
+                },
+                {
+                    data: 'course_code',
+                    name: 'course_code'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        });
 
         /**
          * COURSE DETAIL FORM MODAL POP UP
@@ -153,12 +137,12 @@
                                         '</strong></div>');
                             });
                         }
-                        if (data.request) {
+                        if (data.success) {
                             $('#course_form')[0].reset();
                             $('#course_modal').modal('hide');
                             html = '<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>' + data.success + '</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-                            $('#message').html(html);
-                            // $('#course_assessment').DataTable().ajax.reload();
+                            $('#message').html(data.html);
+                            $('#course').DataTable().ajax.reload();
                         }
                     },
                     error: function (jqxhr, status, exception) {

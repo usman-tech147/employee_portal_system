@@ -4,7 +4,7 @@ namespace App\Http\Controllers\HR;
 
 use App\Models\Hr\Course;
 use App\Models\Hr\Program;
-use http\Env\Response;
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -29,21 +29,33 @@ class CourseController extends Controller
         return response()->json(['data' => $data]);
     }
 
-//    public function getCoursesAssessments()
-//    {
-//        $course_Assessments = User::find(Auth::user()->id)->course_assessments;
-//
-//        return DataTables::of($course_Assessments)
-//            ->addColumn('action', function ($courses) {
-//                $button = '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">';
-//                $button .= '<button id="'.$courses->id.'" onclick="editCourseAssessmet('.$courses->id.')" class="edit btn btn-warning">Edit</button>';
-//                $button .= '<button type="button" id="'.$courses['id'].'" onclick="deleteCourseAssessmet('.$courses->id.')" class="delete btn btn-danger">Delete</button>';
-//                $button .= '</div>';
-//                return $button;
-//            })->rawColumns(['action'])->toJson();
-//
-//    }
-//
+    public function getAllCourses()
+    {
+//        $courses = Course::select('id','course_name','course_code')->with('programs:id,name')->get();
+//        dd($course);
+        $courses = Course::all();
+
+        return DataTables::of($courses)
+            ->addColumn('program', function ($courses) {
+                $programs = Course::find($courses->id)->programs;
+//                return $programs;
+                $progs = array();
+                foreach ($programs as $program) {
+                    array_push($progs, $program->name);
+
+                }
+                return $progs;
+            })
+            ->addColumn('action', function ($courses) {
+                $button = '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">';
+                $button .= '<button id="' . $courses->id . '" onclick="editCourse(' . $courses->id . ')" class="edit btn btn-warning">Edit</button>';
+                $button .= '<button type="button" id="' . $courses['id'] . '" onclick="deleteCourse(' . $courses->id . ')" class="delete btn btn-danger">Delete</button>';
+                $button .= '</div>';
+                return $button;
+            })->rawColumns(['action'])->toJson();
+
+    }
+
     public function store(Request $request)
     {
         $rules =
@@ -60,11 +72,10 @@ class CourseController extends Controller
         $course->course_name = $request->course_name;
         $course->course_code = $request->course_code;
         $course->save();
-        $course->programs()->sync($request->programs) ;
+        $course->programs()->sync($request->programs);
 
-        return response()->json(['request' => $request->all()]);
 
-//        return response()->json(['success' => 'this is post method']);
+        return response()->json(['success' => 'course activity done successfully']);
     }
 //
 //    public function edit($id)
