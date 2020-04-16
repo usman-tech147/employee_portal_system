@@ -15,7 +15,9 @@ class CreateCourseProgram extends Migration
     {
         Schema::create('course_program', function (Blueprint $table) {
             $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->unsignedBigInteger('program_id');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();
         });
     }

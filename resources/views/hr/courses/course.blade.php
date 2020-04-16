@@ -232,38 +232,39 @@
         /**
          * DELETE COURSE DETAIL MODAL POP UP
          * **/
-        // function deleteCourseAssessmet(id) {
-        //     $('#confirmModel').modal('show');
-        //     $('#del').val(id);
-        //     // $('.modal-title').text('CONFIRMATION');
-        // }
+        function deleteCourse(id) {
+            $('#confirmModel').modal('show');
+            $('#del').val(id);
+            // $('.modal-title').text('CONFIRMATION');
+        }
 
         /**
-         * DELETE REQUEST FOR COURSE DETAIL
+         * DELETE REQUEST FOR COURSE
          * **/
-        {{--function deleteData() {--}}
-            {{--var id = $('#del').val();--}}
-            {{--var token = $("meta[name='csrf-token']").attr("content");--}}
+        function deleteData() {
+            var id = $('#del').val();
+            var token = $("meta[name='csrf-token']").attr("content");
 
-            {{--var c_id = id;--}}
-            {{--var url = '{{route('course_assessments.destroy',":c_id")}}';--}}
-            {{--url = url.replace(':c_id', c_id);--}}
-            {{--$.ajax(--}}
-                {{--{--}}
-                    {{--url: url,--}}
-                    {{--type: 'DELETE',--}}
-                    {{--data: {--}}
-                        {{--"id": id,--}}
-                        {{--"_token": token,--}}
-                    {{--},--}}
-                    {{--success: function (data) {--}}
-                        {{--$('#confirmModel').modal('hide');--}}
-                        {{--html = '<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>' + data.success + '</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';--}}
-                        {{--$('#message').html(html);--}}
-                        {{--$('#course_assessment').DataTable().ajax.reload();--}}
-                    {{--}--}}
-                {{--});--}}
-        {{--}--}}
+            var c_id = id;
+            var url = '{{route('course.destroy',":c_id")}}';
+            url = url.replace(':c_id', c_id);
+            $.ajax(
+                {
+                    url: url,
+                    type: 'DELETE',
+                    data: {
+                        "id": id,
+                        "_token": token,
+                    },
+                    success: function (data) {
+                        console.log(data.success);
+                        $('#confirmModel').modal('hide');
+                        html = '<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>' + data.success + '</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                        $('#message').html(html);
+                        $('#course').DataTable().ajax.reload();
+                    }
+                });
+        }
 
     </script>
 @endsection

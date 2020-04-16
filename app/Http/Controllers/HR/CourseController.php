@@ -14,7 +14,7 @@ class CourseController extends Controller
     public function index()
     {
 //        $programs = Course::find(1)->programs;
-//        return $programs;
+
         return view('hr.courses.course');
     }
 
@@ -109,11 +109,14 @@ class CourseController extends Controller
 //        return response()->json(['success' => 'Course Assessment Edited Successfully']);
 //    }
 //
-//    public function destroy($id)
-//    {
-//        CourseAssessment::find($id)->delete($id);
-//        return response()->json([
-//            'success' => 'Record Deleted Successfully!'
-//        ]);
-//    }
+    public function destroy($id)
+    {
+        $course = Course::find($id);
+        $course->delete();
+//        'success' => 'Record Deleted Successfully!'
+//        return $course->programs();
+        return response()->json([
+            'success' => 'Record Deleted Successfully!'
+        ]);
+    }
 }
