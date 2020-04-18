@@ -128,6 +128,7 @@
          * COURSE DETAIL FORM MODAL POP UP
          * **/
         function courseDetailForm() {
+            getCourseLevel();
             $('#modal-title').text('Add Course Detail');
             $('#course_detail_modal').modal('show');
             $('#course_detail_modal form')[0].reset();
@@ -136,6 +137,28 @@
             $('.action').attr('id', 'store');
             $('.action').text('Save Record');
         }
+
+        function getCourseLevel()
+        {
+            var url = '{{route('helper.course_levels')}}';
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var template = '<option value="default">Choose...</option>';
+                    $.each(data.course_levels, function(i, item) {
+                        template += '<option value="' + item.id + '">' + item.name + '</option>';
+                    });
+
+                    $('#course_level').html(template);
+                },
+                error: function (jqxhr, status, exception) {
+                    alert('Exception:', exception);
+                }
+            });
+        }
+
 
         /**
          * POST and PATCH REQUEST FOR COURSE DETAIL
@@ -292,87 +315,3 @@
 
     </script>
 @endsection
-
-{{--function submitForm() {--}}
-{{--$('#course_detail_form').submit();--}}
-{{--$('#course_detail_form').on('submit', function (event) {--}}
-{{--event.preventDefault();--}}
-{{--data = new FormData(this);--}}
-{{--$.ajax({--}}
-{{--url: '{{route('course_detail.store')}}',--}}
-{{--method: 'POST',--}}
-{{--// async:false,--}}
-{{--data: new FormData(this),--}}
-{{--contentType: false,--}}
-{{--cache: false,--}}
-{{--processData: false,--}}
-{{--datatype: 'json',--}}
-{{--success: function (data) {--}}
-{{--$('#course_detail_modal form').find('.invalid-feedback').remove();--}}
-{{--$('#course_detail_modal form').find('.form-control').removeClass('is-invalid');--}}
-{{--if (data.errors) {--}}
-{{--$.each(data.errors, function (key, value) {--}}
-{{--$('#' + key)--}}
-{{--.addClass('is-invalid')--}}
-{{--.after('<div class="invalid-feedback text-"><strong>'--}}
-{{--+ value +--}}
-{{--'</strong></div>');--}}
-{{--});--}}
-{{--}--}}
-{{--if (data.success) {--}}
-{{--html = '<div class="alert alert-success">' + data.success + '</div>';--}}
-{{--$('#course_detail_form')[0].reset();--}}
-{{--$('#course_table').DataTable().ajax.reload();--}}
-{{--}--}}
-{{--// $('#form_result').html(html)--}}
-{{--},--}}
-{{--error: function (jqxhr, status, exception) {--}}
-{{--alert('Exception:', jqxhr);--}}
-{{--}--}}
-{{--});--}}
-{{--});--}}
-{{--}--}}
-
-
-{{--/**--}}
-{{--* PATCH REQUEST FOR UPDATE COURSE DETAIL RECORD--}}
-{{--* **/--}}
-{{--function updateForm(id) {--}}
-{{--$('#course_detail_form').on('submit', function (e) {--}}
-{{--e.preventDefault();--}}
-{{--var c_id = id;--}}
-{{--var url = '{{route('course_detail.update',":c_id")}}';--}}
-{{--url = url.replace(':c_id', c_id);--}}
-{{--var formdata = new FormData(this);--}}
-{{--formdata.set('_method', 'PATCH');--}}
-{{--$.ajax({--}}
-{{--url: url,--}}
-{{--type: 'POST',--}}
-{{--data: formdata,--}}
-{{--contentType: false,--}}
-{{--cache: false,--}}
-{{--processData: false,--}}
-{{--datatype: 'json',--}}
-{{--success: function (data) {--}}
-{{--var html = '';--}}
-{{--if (data.errors) {--}}
-{{--html = '<div class="alert alert-danger"> ';--}}
-{{--for (var count = 0; count < data.errors.length; count++) {--}}
-{{--html += '<p>' + data.errors[count] + '</p>';--}}
-{{--}--}}
-{{--html += '</div>';--}}
-{{--}--}}
-{{--if (data.success) {--}}
-{{--html = '<div class="alert alert-success">' + data.success + '</div>';--}}
-{{--$('#course_detail_form')[0].reset();--}}
-{{--$('#course_table').DataTable().ajax.reload();--}}
-{{--}--}}
-{{--$('#form_result').html(html)--}}
-{{--},--}}
-{{--error: function (jqxhr, status, exception) {--}}
-{{--alert('Exception:', exception);--}}
-{{--}--}}
-{{--});--}}
-
-{{--});--}}
-{{--}--}}

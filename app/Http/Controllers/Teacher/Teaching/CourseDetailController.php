@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Teacher\Teaching;
 
+use App\Models\Hr\CourseLevel;
+use App\Models\Hr\Program;
 use App\Models\Teacher\Teaching\CourseDetail;
 use App\User;
 use Illuminate\Http\Request;
@@ -14,12 +16,15 @@ class CourseDetailController extends Controller
 {
     public function index()
     {
+//        $programs = CourseLevel::find(3)->programs;
+//        return $programs;
+//        $courses = Program::find(1)->courses;
+//        return $courses;
         return view('teacher.teaching.Course_Detail.course_detail_show');
     }
 
     public function getCoursesDetail()
     {
-
         $course_Details = User::find(Auth::user()->id)->course_details;
         return DataTables::of($course_Details)
             ->addColumn('action', function ($courses) {
