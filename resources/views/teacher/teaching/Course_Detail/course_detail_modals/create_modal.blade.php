@@ -14,45 +14,28 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="course_level">Course Level</label>
-                            <select id="course_level" name="course_level" class="form-control">
-                                <option value="default">Choose...</option>
-                                <option value="level 1"> level 1</option>
-                                <option value="level 2"> level 2</option>
-                                <option value="level 3"> level 3</option>
-                                <option value="level 4"> level 4</option>
+                            <select id="course_level" name="course_level" class="form-control" onchange="getPrograms()">
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="program">Program</label>
-                            <select id="program" name="program" class="form-control">
+                            <select id="program" name="program" class="form-control" onchange="getCourses()">
                                 <option value="default">Choose...</option>
-                                <option value="program 1"> program 1</option>
-                                <option value="program 2"> program 2</option>
-                                <option value="program 3"> program 3</option>
-                                <option value="program 4"> program 4</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="course_title">Course Title</label>
-                            <select id="course_title" name="course_title" class="form-control">
+                            <select id="course_title" name="course_title" class="form-control"
+                                    onchange="getCourseCode()">
                                 <option value="default">Choose...</option>
-                                <option value="title 1"> title 1</option>
-                                <option value="title 2"> title 2</option>
-                                <option value="title 3"> title 3</option>
-                                <option value="title 4"> title 4</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6" id="ass">
                             <label for="course_code">Course Code</label>
-                            <select id="course_code" name="course_code" class="form-control">
-                                <option value="default">Choose...</option>
-                                <option value="code 1"> code 1</option>
-                                <option value="code 2"> code 2</option>
-                                <option value="code 3"> code 3</option>
-                                <option value="code 4"> code 4</option>
-                            </select>
+                            <input type="text" class="form-control" id="course_code" name="course_code"
+                                   placeholder="Course Code" readonly>
                         </div>
                     </div>
                     <div class="form-row">
@@ -60,10 +43,8 @@
                             <label for="semester">Semester</label>
                             <select id="semester" name="semester" class="form-control">
                                 <option value="default">Choose...</option>
-                                <option value="semester 1"> semester 1</option>
-                                <option value="semester 2"> semester 2</option>
-                                <option value="semester 3"> semester 3</option>
-                                <option value="semester 4"> semester 4</option>
+                                <option value="spring"> Spring </option>
+                                <option value="fall"> Fall </option>
                             </select>
                         </div>
                         <div class="form-group col-md-6" id="ass">

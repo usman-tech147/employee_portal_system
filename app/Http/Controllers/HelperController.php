@@ -16,13 +16,13 @@ class HelperController extends Controller
     }
     public function getCourseLevelPrograms($id)
     {
-        $programs = CourseLevel::find(1)->programs;
-        return $programs;
+        $programs = CourseLevel::find($id)->programs;
+        return response()->json(['programs' => $programs]);
     }
 
     public function getProgramCourses($id)
     {
-        $courses = Program::find(1)->courses;
-        return $courses;
+        $courses = Program::find($id)->courses;
+        return response()->json(['courses' => $courses]);
     }
 }

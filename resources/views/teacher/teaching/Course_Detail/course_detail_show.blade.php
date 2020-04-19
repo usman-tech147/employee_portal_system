@@ -70,6 +70,8 @@
         /**
          * GET REQUEST FOR COURSE DETAIL
          * **/
+
+        var courses;
         $('#course_table').DataTable({
             processing: true,
             serverSide: true,
@@ -138,6 +140,10 @@
             $('.action').text('Save Record');
         }
 
+
+        /**
+         * COURSE DETAIL GET COURSE LEVELS
+         * **/
         function getCourseLevel()
         {
             var url = '{{route('helper.course_levels')}}';
@@ -161,15 +167,91 @@
 
 
         /**
+         * COURSE DETAIL GET COURSE LEVEL PROGRAMS
+         * **/
+        function getPrograms()
+        {
+            var id = $('#course_level').val();
+            var url = '{{route('helper.course_level.programs',":id")}}';
+            url = url.replace(':id', id);
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var template = '<option value="default">Choose...</option>';
+                    $.each(data.programs, function(i, item) {
+                        template += '<option value="' + item.id + '">' + item.name + '</option>';
+                    });
+
+                    $('#program').html(template);
+                },
+                error: function (jqxhr, status, exception) {
+                    alert('Exception:', exception);
+                }
+            });
+        }
+
+
+        /**
+         * COURSE DETAIL GET PROGRAM COURSES
+         * **/
+        function getCourses()
+        {
+            var id = $('#program').val();
+            var url = '{{route('helper.program.courses',":id")}}';
+            url = url.replace(':id', id);
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    courses = data.courses;
+                    var template = '<option value="default">Choose...</option>';
+                    $.each(data.courses, function(i, item) {
+                        template += '<option value="' + item.id + '">' + item.course_name + '</option>';
+                    });
+                    $('#course_title').html(template);
+                },
+                error: function (jqxhr, status, exception) {
+                    alert('Exception:', exception);
+                }
+            });
+        }
+
+
+        /**
+         * COURSE DETAIL GET COURSE CODE
+         * **/
+        function getCourseCode()
+        {
+            id = $('#course_title').val();
+            $.each(courses, function(i, item) {
+                if(id == item.id)
+                {
+                    $('#course_code').val(item.course_code);
+                }
+            });
+        }
+
+        /**
          * POST and PATCH REQUEST FOR COURSE DETAIL
          * **/
         $('#course_detail_form').submit(function (e) {
             if ($('.action').attr('id') == 'store') {
-                data = new FormData(this);
+
+                formdata = new FormData(this);
+                formdata.set('course_level',$('#course_level option:selected').text());
+                formdata.set('program',$('#program option:selected').text());
+                formdata.set('course_title',$('#course_title option:selected').text());
+                // alert(formdata.get('program'));
+                // alert(data.get('program'));
+
+
                 $.ajax({
                     url: '{{route('course_detail.store')}}',
                     method: 'POST',
-                    data: new FormData(this),
+                    data: formdata,
                     contentType: false,
                     cache: false,
                     processData: false,
@@ -187,6 +269,7 @@
                             });
                         }
                         if (data.success) {
+                            // console.log(data.success);
                             $('#course_detail_form')[0].reset();
                             $('#course_detail_modal').modal('hide');
                             html = '<div class="alert alert-success alert-dismissible fade show" role="alert"> <strong>' + data.success + '</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
@@ -256,6 +339,9 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
+                    getCourseLevel();
+                    // console.log(data.data)
+
                     $('#modal-title').text('Edit Course Detail');
                     $('#course_detail_modal').modal('show');
                     $('.action').attr('id', 'updation');
@@ -263,6 +349,7 @@
                     $('#course_level').val(data.course_level);
                     $('#program').val(data.program);
                     $('#course_title').val(data.course_title);
+                    $("#course_code").attr("readonly", false);
                     $('#course_code').val(data.course_code);
                     $('#semester').val(data.semester);
                     $('#assessments').val(data.assessments);

@@ -44,7 +44,7 @@ class CourseDetailController extends Controller
                 'course_level' => 'required|not_in:default',
                 'program' => 'required|not_in:default',
                 'course_title' => 'required|not_in:default',
-                'course_code' => 'required|not_in:default',
+                'course_code' => 'required',
                 'semester' => 'required|not_in:default',
                 'assessments' => 'required',
                 'makeup_classes' => 'required',
@@ -59,13 +59,14 @@ class CourseDetailController extends Controller
         $course->user_id = Auth::user()->id;
         $course->save();
 
+//        return response()->json(['success' => $request]);
         return response()->json(['success' => 'Course Detail Saved Successfully']);
     }
 
     public function edit($id)
     {
         $data = CourseDetail::findOrFail($id);
-        return $data;
+        return response()->json(['data' => $data]);
     }
 
 

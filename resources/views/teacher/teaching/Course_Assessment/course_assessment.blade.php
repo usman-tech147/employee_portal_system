@@ -216,6 +216,7 @@
                     $('#course_assessment_modal').modal('show');
                     $('.action').attr('id', 'updation');
                     $('.action').text('Update Record');
+
                     $('#course_level').val(data.course_level);
                     $('#program').val(data.program);
                     $('#course_title').val(data.course_title);
