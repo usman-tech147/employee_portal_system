@@ -72,10 +72,15 @@
          * **/
 
         var courses;
+        var course_levels;
+        $(document).ready(function (e) {
+            // e.preventDefault;
+            getCourseLevel();
+        });
         $('#course_table').DataTable({
             processing: true,
             serverSide: true,
-            responsive:true,
+            responsive: true,
             autoWidth: false,
             ajax: {
                 url: '{{route('all.courses.details')}}',
@@ -144,20 +149,23 @@
         /**
          * COURSE DETAIL GET COURSE LEVELS
          * **/
-        function getCourseLevel()
-        {
+        function getCourseLevel() {
             var url = '{{route('helper.course_levels')}}';
             $.ajax({
                 url: url,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
+
                     var template = '<option value="default">Choose...</option>';
-                    $.each(data.course_levels, function(i, item) {
+                    $.each(data.course_levels, function (i, item) {
                         template += '<option value="' + item.id + '">' + item.name + '</option>';
                     });
 
+                    course_levels = data.course_levels;
+
                     $('#course_level').html(template);
+
                 },
                 error: function (jqxhr, status, exception) {
                     alert('Exception:', exception);
@@ -165,12 +173,10 @@
             });
         }
 
-
         /**
          * COURSE DETAIL GET COURSE LEVEL PROGRAMS
          * **/
-        function getPrograms()
-        {
+        function getPrograms() {
             var id = $('#course_level').val();
             var url = '{{route('helper.course_level.programs',":id")}}';
             url = url.replace(':id', id);
@@ -180,7 +186,7 @@
                 dataType: 'json',
                 success: function (data) {
                     var template = '<option value="default">Choose...</option>';
-                    $.each(data.programs, function(i, item) {
+                    $.each(data.programs, function (i, item) {
                         template += '<option value="' + item.id + '">' + item.name + '</option>';
                     });
 
@@ -196,8 +202,7 @@
         /**
          * COURSE DETAIL GET PROGRAM COURSES
          * **/
-        function getCourses()
-        {
+        function getCourses() {
             var id = $('#program').val();
             var url = '{{route('helper.program.courses',":id")}}';
             url = url.replace(':id', id);
@@ -208,7 +213,7 @@
                 success: function (data) {
                     courses = data.courses;
                     var template = '<option value="default">Choose...</option>';
-                    $.each(data.courses, function(i, item) {
+                    $.each(data.courses, function (i, item) {
                         template += '<option value="' + item.id + '">' + item.course_name + '</option>';
                     });
                     $('#course_title').html(template);
@@ -223,12 +228,10 @@
         /**
          * COURSE DETAIL GET COURSE CODE
          * **/
-        function getCourseCode()
-        {
+        function getCourseCode() {
             id = $('#course_title').val();
-            $.each(courses, function(i, item) {
-                if(id == item.id)
-                {
+            $.each(courses, function (i, item) {
+                if (id == item.id) {
                     $('#course_code').val(item.course_code);
                 }
             });
@@ -241,9 +244,9 @@
             if ($('.action').attr('id') == 'store') {
 
                 formdata = new FormData(this);
-                formdata.set('course_level',$('#course_level option:selected').text());
-                formdata.set('program',$('#program option:selected').text());
-                formdata.set('course_title',$('#course_title option:selected').text());
+                formdata.set('course_level', $('#course_level option:selected').text());
+                formdata.set('program', $('#program option:selected').text());
+                formdata.set('course_title', $('#course_title option:selected').text());
                 // alert(formdata.get('program'));
                 // alert(data.get('program'));
 
@@ -329,6 +332,7 @@
          * **/
         function editCourseDetail(id) {
             $('#course_detail_form')[0].reset();
+            $('#course_level').empty();
             $('#course_detail_modal form').find('.invalid-feedback').remove();
             $('#course_detail_modal form').find('.form-control').removeClass('is-invalid');
             var c_id = id;
@@ -339,23 +343,35 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    getCourseLevel();
-                    // console.log(data.data)
+
+                    console.log(course_levels[0].name);
+                    $('#course_level').append('<option value="">' + data.data.course_level + '</option>');
+                    $('#course_level').on('click', function () {
+                        $.each(course_levels, function(key, value) {
+                            $('#course_level').empty();
+                            $('#course_level').append('<option value="">' + data.data.course_level + '</option>');
+                            $('#course_level').append('<option value="default">' + "Select" + '</option>');
+                            $('#course_level')
+                                .append($("<option></option>")
+                                    .attr("value",value.id)
+                                    .text(value.name));
+                        });
+                    });
 
                     $('#modal-title').text('Edit Course Detail');
                     $('#course_detail_modal').modal('show');
                     $('.action').attr('id', 'updation');
-                    $('.action').text('Update Record');
+                    $('.action').text('Update');
                     $('#course_level').val(data.course_level);
                     $('#program').val(data.program);
                     $('#course_title').val(data.course_title);
                     $("#course_code").attr("readonly", false);
                     $('#course_code').val(data.course_code);
                     $('#semester').val(data.semester);
-                    $('#assessments').val(data.assessments);
-                    $('#makeup_classes').val(data.makeup_classes);
-                    $('#student_feedback').val(data.student_feedback);
-                    $('#hidden_id').val(data.id);
+                    $('#assessments').val(data.data.assessments);
+                    $('#makeup_classes').val(data.data.makeup_classes);
+                    $('#student_feedback').val(data.data.student_feedback);
+                    $('#hidden_id').val(data.data.id);
                 },
                 error: function (jqxhr, status, exception) {
                     alert('Exception:', exception);
