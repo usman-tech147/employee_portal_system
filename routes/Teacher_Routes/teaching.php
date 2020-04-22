@@ -5,15 +5,20 @@ Route::group(['namespace' => 'Teacher', 'middleware' => 'role:teacher'], functio
 
         Route::get('/fill/report', 'TeacherController@teachingTabs')->name('teaching.tabs')->middleware('disable_links');
         //teaching routes
-//         2.1: course detail routes
+        //2.1: course detail routes
         Route::resource('/teaching/course_detail', 'Teaching\CourseDetailController')->middleware('disable_links');
         Route::get('/all/courses/details', 'Teaching\CourseDetailController@getCoursesDetail')->name('all.courses.details');
-        // 2.1: course detail routes
+
+
         // 2.3: course assessments routes
         Route::resource('/teaching/course_assessments', 'Teaching\CourseAssessmentController')->middleware('disable_links');
         Route::get('/all/courses/assessments', 'Teaching\CourseAssessmentController@getCoursesAssessments')->name('all.courses.assessments');
-        // 2.3: course assessments routes
-        //teaching routes
+
+
+//        // 2.3: New Course routes
+        Route::resource('/teaching/new_course', 'Teaching\NewCourseController')->middleware('disable_links');
+        Route::get('/all/new/courses', 'Teaching\NewCourseController@getNewCourses')->name('all.new.courses');
+//        //teaching routes
 
     });
 });

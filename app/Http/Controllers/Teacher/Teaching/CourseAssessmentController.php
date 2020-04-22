@@ -40,7 +40,7 @@ class CourseAssessmentController extends Controller
                 'course_level' => 'required|not_in:default',
                 'program' => 'required|not_in:default',
                 'course_title' => 'required|not_in:default',
-                'course_code' => 'required|not_in:default',
+                'course_code' => 'required',
                 'semester' => 'required|not_in:default',
                 'final_result_submission' => 'required|not_in:default',
                 'moodle_usage_status' => 'required',

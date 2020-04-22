@@ -78,7 +78,7 @@
 
                 </div>
                 <div class="col-lg-4 col-sm-6 col-md-6">
-                    <a href="#" class="nav-link text-secondary">
+                    <a href="{{route('new_course.index')}}" class="nav-link text-secondary">
                         <div class="info-box">
                             <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-pen"></i></span>
                             <div class="info-box-content">
