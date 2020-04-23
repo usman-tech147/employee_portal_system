@@ -5,6 +5,7 @@ namespace App;
 use App\Models\Hr\ManageProgram\School;
 use App\Models\Teacher\Teaching\CourseAssessment;
 use App\Models\Teacher\Teaching\CourseDetail;
+use App\Models\Teacher\Teaching\NewCourse;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,6 +53,11 @@ class User extends Authenticatable
     public function course_assessments()
     {
         return $this->hasMany(CourseAssessment::class);
+    }
+
+    public function new_courses()
+    {
+        return $this->hasMany(NewCourse::class);
     }
 
     public function school()
