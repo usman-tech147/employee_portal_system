@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 //        factory(App\Models\Teacher\Teaching\CourseDetail::class,20)->create();
 //        factory(App\Models\Teacher\Teaching\CourseAssessment::class, 20)->create();
 //        factory(App\Models\Teacher\Teaching\NewCourse::class, 20)->create();
+//        factory(App\Models\Teacher\Teaching\ThesisSupervised::class, 20)->create();
 
     }
 }

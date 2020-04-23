@@ -6,6 +6,7 @@ use App\Models\Hr\ManageProgram\School;
 use App\Models\Teacher\Teaching\CourseAssessment;
 use App\Models\Teacher\Teaching\CourseDetail;
 use App\Models\Teacher\Teaching\NewCourse;
+use App\Models\Teacher\Teaching\ThesisSupervised;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -58,6 +59,11 @@ class User extends Authenticatable
     public function new_courses()
     {
         return $this->hasMany(NewCourse::class);
+    }
+
+    public function thesis_supervises()
+    {
+        return $this->hasMany(ThesisSupervised::class);
     }
 
     public function school()

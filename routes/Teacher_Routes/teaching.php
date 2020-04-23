@@ -18,6 +18,11 @@ Route::group(['namespace' => 'Teacher', 'middleware' => 'role:teacher'], functio
 //        // 2.3: New Course routes
         Route::resource('/teaching/new_course', 'Teaching\NewCourseController')->middleware('disable_links');
         Route::get('/all/new/courses', 'Teaching\NewCourseController@getNewCourses')->name('all.new.courses');
+
+
+        // 2.3: Thesis Supervised routes
+        Route::resource('/teaching/thesis_supervised', 'Teaching\ThesisSupervisedController')->middleware('disable_links');
+        Route::get('/all/thesis/supervises', 'Teaching\ThesisSupervisedController@getThesisSupervises')->name('all.thesis.supervises');
 //        //teaching routes
 
     });
