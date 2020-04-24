@@ -6,6 +6,7 @@ use App\Models\Hr\ManageProgram\School;
 use App\Models\Teacher\Teaching\CourseAssessment;
 use App\Models\Teacher\Teaching\CourseDetail;
 use App\Models\Teacher\Teaching\NewCourse;
+use App\Models\Teacher\Teaching\ProjectSupervision;
 use App\Models\Teacher\Teaching\ThesisSupervised;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -46,6 +47,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
+
     public function course_details()
     {
         return $this->hasMany(CourseDetail::class);
@@ -66,8 +73,9 @@ class User extends Authenticatable
         return $this->hasMany(ThesisSupervised::class);
     }
 
-    public function school()
+    public function project_supervises()
     {
-        return $this->belongsTo(School::class);
+        return $this->hasMany(ProjectSupervision::class);
     }
+
 }
