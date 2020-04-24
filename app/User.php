@@ -8,6 +8,7 @@ use App\Models\Teacher\Teaching\CourseDetail;
 use App\Models\Teacher\Teaching\NewCourse;
 use App\Models\Teacher\Teaching\ProjectSupervision;
 use App\Models\Teacher\Teaching\ThesisSupervised;
+use App\Models\Teacher\Teaching\WorkshopTerminal;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -76,6 +77,11 @@ class User extends Authenticatable
     public function project_supervises()
     {
         return $this->hasMany(ProjectSupervision::class);
+    }
+
+    public function workshop_terminals()
+    {
+        return $this->hasMany(WorkshopTerminal::class);
     }
 
 }

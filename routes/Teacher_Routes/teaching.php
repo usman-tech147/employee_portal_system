@@ -27,6 +27,12 @@ Route::group(['namespace' => 'Teacher', 'middleware' => 'role:teacher'], functio
         // 2.3: Project Supervision routes
         Route::resource('/teaching/project_supervision', 'Teaching\ProjectSupervisionController')->middleware('disable_links');
         Route::get('/all/project/supervises', 'Teaching\ProjectSupervisionController@getProjectSupervises')->name('all.project.supervises');
+
+
+        // 2.3: Workshop Terminal routes
+        Route::resource('/teaching/workshop_terminal', 'Teaching\WorkshopTerminalController')->middleware('disable_links');
+//        Route::get('/all/project/supervises', 'Teaching\ProjectSupervisionController@getProjectSupervises')->name('all.project.supervises');
+
 //        //teaching routes
 
     });

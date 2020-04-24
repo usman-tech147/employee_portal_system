@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
 //        factory(App\Models\Teacher\Teaching\NewCourse::class, 20)->create();
 //        factory(App\Models\Teacher\Teaching\ThesisSupervised::class, 20)->create();
 //        factory(App\Models\Teacher\Teaching\ProjectSupervision::class, 20)->create();
+//        factory(App\Models\Teacher\Teaching\WorkshopTerminal::class, 20)->create();
     }
 }
