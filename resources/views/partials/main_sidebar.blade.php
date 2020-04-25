@@ -155,12 +155,30 @@
                                     <p>Teaching</p>
                                 </a>
                             </li>
-                        <li class="nav-item">
-                            <a href="{{route('teacher.report.dean')}}" class="nav-link">
-                                <i class="fas fa-share"></i>
-                                <p>Teacher Send Report To Dean</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{route('advising.tabs')}}" class="nav-link">
+                                    <i class="fas fa-ad"></i>
+                                    <p>Advising & Counseling</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('research.tabs')}}" class="nav-link">
+                                    <i class="fas fa-search"></i>
+                                    <p>Research & Publications </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('institutional.tabs')}}" class="nav-link">
+                                    <i class="fas fa-university"></i>
+                                    <p>Institutional Engagements </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('teacher.report.dean')}}" class="nav-link">
+                                    <i class="fas fa-share"></i>
+                                    <p>Teacher Send Report To Dean</p>
+                                </a>
+                            </li>
                         @endif
                         <li class="nav-item">
                             <a href="{{route('teacher.grade')}}" class="nav-link">

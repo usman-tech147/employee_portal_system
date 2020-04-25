@@ -25,6 +25,23 @@ class TeacherController extends Controller
     {
         return view('teacher.teaching_tabs');
     }
+
+
+    public function advising()
+    {
+        return view('teacher.advising_tabs');
+    }
+
+    public function research()
+    {
+        return view('teacher.research_tabs');
+    }
+
+    public function institutional()
+    {
+        return view('teacher.institutional_tabs');
+    }
+
     public function reportToDean()
     {
         $user = User::find(Auth::user()->id);
