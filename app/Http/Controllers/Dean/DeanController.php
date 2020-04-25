@@ -22,6 +22,15 @@ class DeanController extends Controller
         $employees = User::where('status',1)->get();
         return view('dean.teacher_show',compact('employees'));
     }
+
+    public function returnTeacher($id)
+    {
+        $user = User::find($id);
+        $user->status = 0;
+        $user->save();
+        return redirect()->route('dean.teachers');
+    }
+
     public function assignGrade()
     {
         return view('dean.assign_grade');

@@ -43,7 +43,7 @@
                                     </td>
                                     <td>
                                         <a href="#" class="btn btn-warning"> View Report </a>
-                                        <a href="#" class="btn btn-danger"> Send Back </a>
+                                        <a href="{{route('dean.return.teacher',$employee->id)}}" class="btn btn-danger"> Send Back </a>
                                     </td>
                                 </tr>
                             @endforeach
