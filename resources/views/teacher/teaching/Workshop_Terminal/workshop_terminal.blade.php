@@ -57,7 +57,7 @@
             responsive: true,
             autoWidth: false,
             ajax: {
-                url: '{{route('all.thesis.supervises')}}',
+                url: '{{route('all.workshop.terminals')}}',
             },
             columns: [
                 {
@@ -114,6 +114,11 @@
 
             if ($('.action').attr('id') == 'store') {
                 formdata = new FormData(this);
+
+                // for(var pair of formdata.entries()) {
+                //     console.log(pair[0]+ ', '+ pair[1]);
+                // }
+
                 $.ajax({
                     url: '{{route('workshop_terminal.store')}}',
                     method: 'POST',
@@ -192,43 +197,43 @@
         /**
          * GET REQUEST FOR EDIT COURSE DETAIL RECORD
          * **/
-        function editCourseAssessmet(id) {
-            $('#course_assessment_form')[0].reset();
-            $('#course_assessment_modal form').find('.invalid-feedback').remove();
-            $('#course_assessment_modal form').find('.form-control').removeClass('is-invalid');
-            var c_id = id;
-            var url = '{{route('course_assessments.edit',":c_id")}}';
-            url = url.replace(':c_id', c_id);
-            $.ajax({
-                url: url,
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    $('#modal-title').text('Edit Course Assessment');
-                    $('#course_assessment_modal').modal('show');
-                    $('.action').attr('id', 'updation');
-                    $('.action').text('Update Record');
+        {{--function editCourseAssessmet(id) {--}}
+            {{--$('#course_assessment_form')[0].reset();--}}
+            {{--$('#course_assessment_modal form').find('.invalid-feedback').remove();--}}
+            {{--$('#course_assessment_modal form').find('.form-control').removeClass('is-invalid');--}}
+            {{--var c_id = id;--}}
+            {{--var url = '{{route('course_assessments.edit',":c_id")}}';--}}
+            {{--url = url.replace(':c_id', c_id);--}}
+            {{--$.ajax({--}}
+                {{--url: url,--}}
+                {{--type: 'GET',--}}
+                {{--dataType: 'json',--}}
+                {{--success: function (data) {--}}
+                    {{--$('#modal-title').text('Edit Course Assessment');--}}
+                    {{--$('#course_assessment_modal').modal('show');--}}
+                    {{--$('.action').attr('id', 'updation');--}}
+                    {{--$('.action').text('Update Record');--}}
 
-                    $('#course_level').val(data.course_level);
-                    $('#program').val(data.program);
-                    $('#course_title').val(data.course_title);
-                    $('#course_code').val(data.course_code);
-                    $('#semester').val(data.semester);
-                    $('#final_result_submission').val(data.final_result_submission);
-                    $('#moodle_usage_status').val(data.moodle_usage_status);
-                    $('#hidden_id').val(data.id);
-                },
-                error: function (jqxhr, status, exception) {
-                    alert('Exception:', exception);
-                }
-            });
-        }
+                    {{--$('#course_level').val(data.course_level);--}}
+                    {{--$('#program').val(data.program);--}}
+                    {{--$('#course_title').val(data.course_title);--}}
+                    {{--$('#course_code').val(data.course_code);--}}
+                    {{--$('#semester').val(data.semester);--}}
+                    {{--$('#final_result_submission').val(data.final_result_submission);--}}
+                    {{--$('#moodle_usage_status').val(data.moodle_usage_status);--}}
+                    {{--$('#hidden_id').val(data.id);--}}
+                {{--},--}}
+                {{--error: function (jqxhr, status, exception) {--}}
+                    {{--alert('Exception:', exception);--}}
+                {{--}--}}
+            {{--});--}}
+        {{--}--}}
 
 
         /**
          * DELETE COURSE DETAIL MODAL POP UP
          * **/
-        function deleteThesisSupervised(id) {
+        function deleteWorkshopTerminal(id) {
             $('#confirmModel').modal('show');
             $('#del').val(id);
             // $('.modal-title').text('CONFIRMATION');
@@ -242,7 +247,7 @@
             var token = $("meta[name='csrf-token']").attr("content");
 
             var c_id = id;
-            var url = '{{route('thesis_supervised.destroy',":c_id")}}';
+            var url = '{{route('workshop_terminal.destroy',":c_id")}}';
             url = url.replace(':c_id', c_id);
             $.ajax(
                 {

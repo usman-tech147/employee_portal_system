@@ -15,20 +15,20 @@ class WorkshopTerminalController extends Controller
     public function index()
     {
 //        return "thesis supervised";
-        $data = User::find(Auth::user()->id)->workshop_terminals;
-        return $data;
-//        return view('teacher.teaching.Thesis_Supervised.thesis_supervised');
+//        $data = User::find(Auth::user()->id)->workshop_terminals;
+//        return $data;
+        return view('teacher.teaching.Workshop_Terminal.workshop_terminal');
     }
 
-    public function getThesisSupervises()
+    public function getWorkshopTerminals()
     {
-        $thesis_supervises = User::find(Auth::user()->id)->thesis_supervises;
+        $workshop_terminals = User::find(Auth::user()->id)->workshop_terminals;
 
-        return DataTables::of($thesis_supervises)
-            ->addColumn('action', function ($thesis) {
+        return DataTables::of($workshop_terminals)
+            ->addColumn('action', function ($workshop) {
                 $button = '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">';
-                $button .= '<button id="'.$thesis->id.'" onclick="editThesisSupervised('.$thesis->id.')" class="edit btn btn-warning">Edit</button>';
-                $button .= '<button type="button" id="'.$thesis['id'].'" onclick="deleteThesisSupervised('.$thesis->id.')" class="delete btn btn-danger">Delete</button>';
+                $button .= '<button id="'.$workshop->id.'" onclick="editWorkshopTerminal('.$workshop->id.')" class="edit btn btn-warning">Edit</button>';
+                $button .= '<button type="button" id="'.$workshop['id'].'" onclick="deleteWorkshopTerminal('.$workshop->id.')" class="delete btn btn-danger">Delete</button>';
                 $button .= '</div>';
                 return $button;
             })->rawColumns(['action'])->toJson();
@@ -39,21 +39,21 @@ class WorkshopTerminalController extends Controller
     {
         $rules =
             array(
-                'thesis_title' => 'required',
-                'course_level' => 'required|not_in:default',
-                'program' => 'required|not_in:default',
-                'superviser_type_a' => 'required|not_in:default',
-                'superviser_type_b' => 'required|not_in:default',
+                'title' => 'required',
+                'type' => 'required|not_in:default',
+                'month' => 'required',
+                'organization' => 'required',
+                'sponsoring_body' => 'required',
             );
         $error = Validator::make($request->all(), $rules);
         if ($error->fails()) {
             return response()->json(['errors' => $error->errors()]);
         }
-        $thesis_supervised = new ThesisSupervised($request->all());
-        $thesis_supervised->user_id = Auth::user()->id;
-        $thesis_supervised->save();
+        $workshop_terminal = new WorkshopTerminal($request->all());
+        $workshop_terminal->user_id = Auth::user()->id;
+        $workshop_terminal->save();
 
-        return response()->json(['success' => 'Thesis Supervised Saved Successfully']);
+        return response()->json(['success' => 'Workshop Terminal Saved Successfully']);
     }
 
 //    public function edit($id)
@@ -86,7 +86,7 @@ class WorkshopTerminalController extends Controller
 
     public function destroy($id)
     {
-        ThesisSupervised::find($id)->delete($id);
+        WorkshopTerminal::find($id)->delete($id);
         return response()->json([
             'success' => 'Record Deleted Successfully!'
         ]);
