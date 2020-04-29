@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <!-- Info boxes -->
             <div class="row">
-                <div class="col-lg-4 col-sm-6 col-md-6">
+                <div class="col-lg-6 col-sm-6 col-md-6">
                     <a href="#" class="nav-link text-secondary">
                         <div class="info-box">
                             <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-pen"></i></span>
@@ -28,7 +28,7 @@
                 </div>
 
                 {{--<div class="clearfix hidden-md-up"></div>--}}
-                <div class="col-lg-4 col-sm-6 col-md-6">
+                <div class="col-lg-6 col-sm-6 col-md-6">
                     <a href="#" class="nav-link text-secondary">
                         <div class="info-box">
                             <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-pen"></i></span>
@@ -44,7 +44,7 @@
 
                 </div>
 
-                <div class="col-lg-4 col-sm-6 col-md-6">
+                <div class="col-lg-6 col-sm-6 col-md-6">
                     <a href="#" class="nav-link text-secondary">
                         <div class="info-box">
                             <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-pen"></i></span>
@@ -59,7 +59,7 @@
                     </a>
 
                 </div>
-                <div class="col-lg-4 col-sm-6 col-md-6">
+                <div class="col-lg-6 col-sm-6 col-md-6">
                     <a href="#" class="nav-link text-secondary">
                         <div class="info-box">
                             <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-pen"></i></span>

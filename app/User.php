@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Hr\ManageProgram\School;
+use App\Models\Teacher\Advising\BatchAdvising;
 use App\Models\Teacher\Teaching\CourseAssessment;
 use App\Models\Teacher\Teaching\CourseDetail;
 use App\Models\Teacher\Teaching\NewCourse;
@@ -84,4 +85,9 @@ class User extends Authenticatable
         return $this->hasMany(WorkshopTerminal::class);
     }
 
+
+    public function batch_advises()
+    {
+        return $this->hasMany(BatchAdvising::class);
+    }
 }

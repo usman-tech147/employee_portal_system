@@ -14,6 +14,13 @@ class HelperController extends Controller
         $course_levels = CourseLevel::all();
         return response()->json(['course_levels' => $course_levels]);
     }
+
+    public function getPrograms()
+    {
+        $programs = Program::all();
+        return response()->json(['programs' => $programs]);
+    }
+
     public function getCourseLevelPrograms($id)
     {
         $programs = CourseLevel::find($id)->programs;
