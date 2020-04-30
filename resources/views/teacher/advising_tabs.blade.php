@@ -29,17 +29,26 @@
                 <div class="col-lg-6 col-sm-6 col-md-6">
                     <a href="{{route('batch_advising.index')}}" class="nav-link text-secondary">
                         <div class="info-box">
-                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-pen"></i></span>
+                            @if(count(App\User::find(Auth::user()->id)->batch_advises) > 0)
+                                <span class="info-box-icon bg-warning elevation-1">
+                                    <i class="fas fa-check"></i></span>
+                            @else
+                                <span class="info-box-icon bg-danger elevation-1"><i
+                                            class="fas fa-pen"></i></span>
+                            @endif
                             <div class="info-box-content">
-                                <h5 class="info-box-text"><strong>3.2</strong> BATCH ADVISING</h5>
+                                <h5 class="info-box-text"><strong>3.2</strong> Batch Advising</h5>
                                 <span class="info-box-number">
-                  <span> <i class="far fa-plus-square"></i> Create </span>
-                </span>
+                                    @if(count(App\User::find(Auth::user()->id)->batch_advises) > 0)
+                                        <span> <i class="fas fa-edit"></i> View / Update </span>
+                                    @else
+                                        <span> <i class="far fa-plus-square"></i> create </span>
+                                    @endif
+                                </span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
                     </a>
-
                 </div>
 
                 <div class="col-lg-6 col-sm-6 col-md-6">
