@@ -32,4 +32,5 @@ class HelperController extends Controller
         $courses = Program::find($id)->courses;
         return response()->json(['courses' => $courses]);
     }
+
 }

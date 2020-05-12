@@ -7,7 +7,7 @@ Route::group(['namespace' => 'Teacher', 'middleware' => 'role:teacher'], functio
         //teaching routes
         //2.1: course detail routes
         Route::resource('/research-and-publications/travel_and_research', 'ResearchAndPublications\TravelAndResearchController')->middleware('disable_links');
-//        Route::get('/all/courses/details', 'Teaching\CourseDetailController@getCoursesDetail')->name('all.courses.details');
+        Route::get('/all/travel-and-research-details', 'ResearchAndPublications\TravelAndResearchController@getTravelAndResearchDetails')->name('all.travel.details');
 
 
 //        //teaching routes

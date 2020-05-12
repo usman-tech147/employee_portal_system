@@ -16,47 +16,46 @@ class TravelAndResearchController extends Controller
     {
 //        dd('batch index');
 //        return "thesis supervised";
-        $data = User::find(Auth::user()->id)->travel_and_researches;
-        return $data;
-//        return view('teacher.advising.Batch_Advising.batch_advising');
+//        $data = User::find(Auth::user()->id)->travel_and_researches;
+//        return $data;
+        return view('teacher.research.Travel_And_Research.travel_and_research');
     }
 
-//    public function getBatchAdvisesDetail()
-//    {
-//        $batch_advises = User::find(Auth::user()->id)->batch_advises;
+    public function getTravelAndResearchDetails()
+    {
+        $travel_researches = User::find(Auth::user()->id)->travel_and_researches;
+
+        return DataTables::of($travel_researches)
+            ->addColumn('action', function ($travels) {
+                $button = '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">';
+                $button .= '<button id="'.$travels->id.'" onclick="editTravelAndResearch('.$travels->id.')" class="edit btn btn-warning">Edit</button>';
+                $button .= '<button type="button" id="'.$travels['id'].'" onclick="deleteTravelAndResearch('.$travels->id.')" class="delete btn btn-danger">Delete</button>';
+                $button .= '</div>';
+                return $button;
+            })->rawColumns(['action'])->toJson();
+
+    }
 //
-//        return DataTables::of($batch_advises)
-//            ->addColumn('action', function ($advises) {
-//                $button = '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">';
-//                $button .= '<button id="'.$advises->id.'" onclick="editBatchAdvising('.$advises->id.')" class="edit btn btn-warning">Edit</button>';
-//                $button .= '<button type="button" id="'.$advises['id'].'" onclick="deleteBatchAdvising('.$advises->id.')" class="delete btn btn-danger">Delete</button>';
-//                $button .= '</div>';
-//                return $button;
-//            })->rawColumns(['action'])->toJson();
-//
-//    }
-//
-//    public function store(Request $request)
-//    {
-//        $rules =
-//            array(
-//                'program' => 'required|not_in:default',
-//                'batch' => 'required|not_in:default',
-//                'start_date' => 'required',
-//                'end_date' => 'required',
-//                'no_of_students' => 'required',
-//                'meeting_held_on' => 'required|not_in:default',
-//            );
-//        $error = Validator::make($request->all(), $rules);
-//        if ($error->fails()) {
-//            return response()->json(['errors' => $error->errors()]);
-//        }
-//        $thesis_supervised = new BatchAdvising($request->all());
-//        $thesis_supervised->user_id = Auth::user()->id;
-//        $thesis_supervised->save();
-//
-//        return response()->json(['success' => 'Batch Advising Saved Successfully']);
-//    }
+    public function store(Request $request)
+    {
+        $rules =
+            array(
+                'research_type' => 'required|not_in:default',
+                'funding_agency' => 'required',
+                'venue' => 'required',
+                'total_grants' => 'required',
+                'approval' => 'required',
+            );
+        $error = Validator::make($request->all(), $rules);
+        if ($error->fails()) {
+            return response()->json(['errors' => $error->errors()]);
+        }
+        $travel = new TravelAndResearch($request->all());
+        $travel->user_id = Auth::user()->id;
+        $travel->save();
+
+        return response()->json(['success' => 'Batch Advising Saved Successfully']);
+    }
 
 //    public function edit($id)
 //    {
@@ -86,11 +85,11 @@ class TravelAndResearchController extends Controller
 //        return response()->json(['success' => 'New Course Edited Successfully']);
 //    }
 
-//    public function destroy($id)
-//    {
-//        BatchAdvising::find($id)->delete($id);
-//        return response()->json([
-//            'success' => 'Record Deleted Successfully!'
-//        ]);
-//    }
+    public function destroy($id)
+    {
+        TravelAndResearch::find($id)->delete($id);
+        return response()->json([
+            'success' => 'Record Deleted Successfully!'
+        ]);
+    }
 }

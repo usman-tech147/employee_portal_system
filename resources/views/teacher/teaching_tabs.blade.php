@@ -75,7 +75,6 @@
                             <!-- /.info-box-content -->
                         </div>
                     </a>
-
                 </div>
                 <div class="col-lg-4 col-sm-6 col-md-6">
                     <a href="{{route('new_course.index')}}" class="nav-link text-secondary">
