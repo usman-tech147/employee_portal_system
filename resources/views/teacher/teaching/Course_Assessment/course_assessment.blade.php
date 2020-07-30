@@ -43,7 +43,7 @@
             </div>
         </section>
     </div>
-    @include('teacher\teaching\Course_Assessment\course_assessments_modals\delete_modal')
+    {{--@include('teacher\teaching\Course_Assessment\course_assessments_modals\delete_modal')--}}
 @endsection
 
 @section('js')
