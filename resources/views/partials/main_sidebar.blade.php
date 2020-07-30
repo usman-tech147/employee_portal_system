@@ -162,7 +162,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('research.tabs')}}" class="nav-link">
+                                {{--<a href="{{route('research.tabs')}}" class="nav-link">--}}
+                                    {{--<i class="fas fa-search"></i>--}}
+                                    {{--<p>Research & Publications </p>--}}
+                                {{--</a>--}}
+                                <a href="#" class="nav-link">
                                     <i class="fas fa-search"></i>
                                     <p>Research & Publications </p>
                                 </a>
