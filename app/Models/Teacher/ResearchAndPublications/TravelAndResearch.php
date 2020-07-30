@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TravelAndResearch extends Model
 {
+
+    protected $table = "travel_and_researches";
+
     protected $fillable =
         [
             'user_id','research_type','funding_agency','venue',

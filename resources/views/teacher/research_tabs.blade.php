@@ -27,7 +27,8 @@
 
                 </div>
 
-                {{--<div class="clearfix hidden-md-up"></div>--}}
+                <div class="clearfix hidden-md-up"></div>
+
                 <div class="col-lg-6 col-sm-6 col-md-6">
                     <a href="{{route('travel_and_research.index')}}" class="nav-link text-secondary">
                         <div class="info-box">
@@ -88,7 +89,7 @@
             <!-- /.row -->
         <!-- /.row -->
         </div>
-        <!--/. container-fluid -->
+
     </section>
 
 </div>
