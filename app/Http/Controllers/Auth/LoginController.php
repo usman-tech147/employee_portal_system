@@ -30,6 +30,12 @@ class LoginController extends Controller
      */
 //    protected $redirectTo = '/teacher/evaluation/portal';
 
+
+    public function showLoginForm()
+    {
+//        dd($_GET['id']);
+        return view('auth.login');
+    }
     protected function authenticated(Request $request, $user)
     {
         if($user->roles->pluck('name')[0] == 'dean'){
@@ -38,7 +44,10 @@ class LoginController extends Controller
         if($user->roles->pluck('name')[0] == 'teacher'){
             return redirect()->route('teacher.dashboard');
         }
-        return redirect()->route('home');
+        if($user->roles->pluck('name')[0] == 'hr'){
+            return redirect()->route('hr.dashboard');
+        }
+        return redirect()->route('login');
     }
 
     /**
@@ -62,6 +71,6 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return $this->loggedOut($request) ?: redirect(route('login'));
+        return $this->loggedOut($request) ?: redirect(route('home'));
     }
 }

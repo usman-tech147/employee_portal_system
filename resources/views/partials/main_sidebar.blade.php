@@ -27,7 +27,7 @@
                     <ul class="nav nav-treeview">
                         @role('hr')
                         <li class="nav-item">
-                            <a href="{{route('home')}}" class="nav-link">
+                            <a href="{{route('hr.dashboard')}}" class="nav-link">
                                 <i class="fas fa-tachometer-alt"></i>
                                 <p>HR Dashboard</p>
                             </a>

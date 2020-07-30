@@ -21,8 +21,11 @@
 //Route::get('/teacher/evaluation/portal','Auth\LoginController@showLoginForm')->name('login');
 
 
+Route::get('/','HomeController@index')->name('home');
+Route::get('/back','HomeController@back')->name('back');
 
-Route::get('/teacher/evaluation/portal/hr/dashboard', 'HomeController@index')->name('home');
+//Route::get('/teacher/evaluation/portal/hr/dashboard', 'HomeController@index')->name('home');
+Route::get('/teacher/evaluation/portal/hr/dashboard', 'HR\HrController@dashboard')->name('hr.dashboard');
 Route::get('/teacher/evaluation/portal/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/teacher/evaluation/portal/login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Hr\CourseLevel;
 use App\Models\Hr\Program;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,10 +15,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
     /**
      * Show the application dashboard.
@@ -26,5 +28,14 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function back()
+    {
+        if(Auth::user()->roles->pluck('name')[0] == 'teacher')
+            return redirect()->route('teacher.dashboard');
+        if(Auth::user()->roles->pluck('name')[0] == 'dean')
+            return redirect()->route('dean.dashboard');
+        return redirect()->route('teacher.dashboard');
     }
 }
