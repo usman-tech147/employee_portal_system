@@ -2,6 +2,7 @@
 
 Route::group(['namespace' => 'HR', 'middleware' => 'role:hr'], function () {
     Route::prefix('/teacher/evaluation/portal/hr')->group(function () {
+        Route::get('/dashboard', 'HrController@dashboard')->name('hr.dashboard');
 // school routes
         Route::resource('/manage-program/school', 'ManageProgram\SchoolController');
         Route::get('/all/schools/', 'ManageProgram\SchoolController@getAllSchools')->name('all.schools');
