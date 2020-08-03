@@ -52,7 +52,7 @@
                     <img class="card-img-top" src="{{URL::asset('/User_Images/6.png')}}" alt="Card image cap">
                     <div class="card-body">
                         <a href="{{route('login',['id' => 1])}}" class="badge">
-                            <p class="title" style="margin-bottom: 0px">Student</p>
+                            <p class="title" style="margin-bottom: 0px">Teacher</p>
                         </a>
                     </div>
                 </div>

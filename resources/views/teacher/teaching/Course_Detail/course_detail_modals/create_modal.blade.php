@@ -11,8 +11,8 @@
             <div class="modal-body">
                 <form id="course_detail_form" data-toggle="validator">
                     @csrf {{ method_field('POST')}}
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
+                    <div class="form-row child">
+                        <div class="form-group col-md-6 g_child">
                             <label for="course_level">Course Level</label>
                             <select id="course_level" name="course_level" class="form-control" onchange="getPrograms()">
                             </select>
@@ -43,8 +43,8 @@
                             <label for="semester">Semester</label>
                             <select id="semester" name="semester" class="form-control">
                                 <option value="default">Choose...</option>
-                                <option value="spring"> Spring </option>
-                                <option value="fall"> Fall </option>
+                                <option value="Spring"> Spring </option>
+                                <option value="Fall"> Fall </option>
                             </select>
                         </div>
                         <div class="form-group col-md-6" id="ass">

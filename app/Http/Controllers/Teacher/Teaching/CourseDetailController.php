@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Teacher\Teaching;
 
+use App\Http\Controllers\HelperController;
+use App\Models\Hr\Course;
 use App\Models\Hr\CourseLevel;
 use App\Models\Hr\Program;
 use App\Models\Teacher\Teaching\CourseDetail;
@@ -29,8 +31,8 @@ class CourseDetailController extends Controller
         return DataTables::of($course_Details)
             ->addColumn('action', function ($courses) {
                 $button = '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">';
-                $button .= '<button id="'.$courses->id.'" onclick="editCourseDetail('.$courses->id.')" class="edit btn btn-warning">Edit</button>';
-                $button .= '<button type="button" id="'.$courses['id'].'" onclick="deleteCourseDetail('.$courses->id.')" class="delete btn btn-danger">Delete</button>';
+                $button .= '<button id="' . $courses->id . '" onclick="editCourseDetail(' . $courses->id . ')" class="edit btn btn-warning">Edit</button>';
+                $button .= '<button type="button" id="' . $courses['id'] . '" onclick="deleteCourseDetail(' . $courses->id . ')" class="delete btn btn-danger">Delete</button>';
                 $button .= '</div>';
                 return $button;
             })->rawColumns(['action'])->toJson();
@@ -41,9 +43,9 @@ class CourseDetailController extends Controller
     {
         $rules =
             array(
-                'course_level' => 'required|not_in:default',
-                'program' => 'required|not_in:default',
-                'course_title' => 'required|not_in:default',
+                'course_level' => 'required|not_in:Choose...',
+                'program' => 'required|not_in:Choose...',
+                'course_title' => 'required|not_in:Choose...',
                 'course_code' => 'required',
                 'semester' => 'required|not_in:default',
                 'assessments' => 'required',
@@ -59,14 +61,23 @@ class CourseDetailController extends Controller
         $course->user_id = Auth::user()->id;
         $course->save();
 
-//        return response()->json(['success' => $request]);
         return response()->json(['success' => 'Course Detail Saved Successfully']);
     }
 
     public function edit($id)
     {
         $data = CourseDetail::findOrFail($id);
-        return response()->json(['data' => $data]);
+        $course_level = CourseLevel::select('id','name')->get();
+        $programs = Program::select('id','name')->get();
+        $courses = Course::select('id','course_name', 'course_code')->get();
+        return response()->json(
+            [
+                'data' => $data,
+                'c_level' => $course_level,
+                'programs' => $programs,
+                'courses' => $courses
+            ]
+        );
     }
 
 
@@ -74,9 +85,9 @@ class CourseDetailController extends Controller
     {
         $rules =
             array(
-                'course_level' => 'required|not_in:default',
-                'program' => 'required|not_in:default',
-                'course_title' => 'required|not_in:default',
+                'course_level' => 'required|not_in:Choose...',
+                'program' => 'required|not_in:Choose...',
+                'course_title' => 'required|not_in:Choose...',
                 'course_code' => 'required|not_in:default',
                 'semester' => 'required|not_in:default',
                 'assessments' => 'required',
