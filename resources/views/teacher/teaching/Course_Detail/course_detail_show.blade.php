@@ -184,6 +184,9 @@
                         $.each(data.programs, function (i, item) {
                             template += '<option value="' + item.id + '">' + item.name + '</option>';
                         });
+
+                        alert(template);
+
                         $('#program').html(template);
                     },
                     error: function (jqxhr, status, exception) {
@@ -363,8 +366,6 @@
                 dataType: 'json',
                 success: function (data) {
 
-                    alert('edit part works')
-
                     level = data.data.course_level;
                     prog = data.data.program;
                     title = data.data.course_title;
@@ -389,6 +390,8 @@
                             template_2 += '<option value="' + item.id + '" selected>' + item.name + '</option>';
                         }
                     });
+
+                    alert(template_2);
                     $('#program').html(template_2);
 
                     courses = data.courses;
