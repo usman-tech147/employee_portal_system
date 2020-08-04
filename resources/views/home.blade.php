@@ -67,16 +67,6 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <div class="card" style="border: none">
-                    <img class="card-img-top" src="{{URL::asset('/User_Images/8.png')}}" alt="Card image cap">
-                    <div class="card-body">
-                        <a href="{{route('login',['id' => 1])}}" class="badge">
-                            <p class="title" style="margin-bottom: 8px">Student</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div><!-- /.row -->
