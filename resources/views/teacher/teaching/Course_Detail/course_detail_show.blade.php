@@ -169,6 +169,7 @@
          * **/
         function getPrograms() {
 
+            alert('get programs works');
             var id = $('#course_level').val();
 
             if (id != 'default') {
@@ -191,6 +192,7 @@
                 });
             }
             else {
+                alert('get programs else part');
                 var template = '<option value="default">Choose...</option>';
                 $('#program').html(template);
             }
@@ -202,6 +204,7 @@
          * COURSE DETAIL GET PROGRAM COURSES
          * **/
         function getCourses() {
+            alert('get courses works');
             var id = $('#program').val();
 
             if (id != 'default') {
@@ -225,6 +228,8 @@
                 });
             }
             else {
+
+                alert('get courses else');
                 var template = '<option value="default">Choose...</option>';
                 $('#course_title').html(template);
             }
@@ -357,6 +362,8 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
+
+                    alert('edit part works')
 
                     level = data.data.course_level;
                     prog = data.data.program;
