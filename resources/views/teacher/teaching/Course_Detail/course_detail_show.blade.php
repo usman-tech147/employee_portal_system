@@ -179,15 +179,17 @@
             if (id != 'default') {
                 var url = '{{route('helper.course_level.programs',":id")}}';
                 url = url.replace(':id', id);
-                alert(url);
+                console.log("if statement" + url);
                 $.ajax({
                     url: url,
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
 
-                        alert('success');
-                        var template = '<option value="default">choose...</option>';
+                        alert("success method: " + url);
+                        console.log("data comming from server ");
+                        console.log(data)
+                        var template = '<option value="default">choooose...</option>';
                         $.each(data.programs, function (i, item) {
                             template += '<option value="' + item.id + '">' + item.name + '</option>';
                         });
