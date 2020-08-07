@@ -143,6 +143,9 @@
          * COURSE DETAIL GET COURSE LEVELS
          * **/
         function getCourseLevel() {
+
+            alert('get course levels');
+
             var url = '{{route('helper.course_levels')}}';
             $.ajax({
                 url: url,
@@ -169,7 +172,7 @@
          * **/
         function getPrograms() {
 
-            // alert('get programs works');
+            alert('get programs works');
             var id = $('#course_level').val();
 
             if (id != 'default') {
@@ -180,12 +183,12 @@
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
-                        var template = '<option value="default">Choose...</option>';
+                        var template = '<option value="default">choose...</option>';
                         $.each(data.programs, function (i, item) {
                             template += '<option value="' + item.id + '">' + item.name + '</option>';
                         });
 
-                        // alert(template);
+                        alert(template);
 
                         $('#program').html(template);
                     },
