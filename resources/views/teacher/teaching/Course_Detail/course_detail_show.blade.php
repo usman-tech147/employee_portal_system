@@ -186,10 +186,10 @@
                         var template = '<option value="default">choose...</option>';
                         $.each(data.programs, function (i, item) {
                             template += '<option value="' + item.id + '">' + item.name + '</option>';
-                            console.log(template);
                         });
 
-                        alert(template);
+                        alert(data.programs[0].id + " " + data.programs[0].name)
+                        console.log(id + " " + data.message);
 
                         $('#program').html(template);
                     },
