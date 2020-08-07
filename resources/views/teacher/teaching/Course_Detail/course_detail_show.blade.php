@@ -186,6 +186,7 @@
                         var template = '<option value="default">choose...</option>';
                         $.each(data.programs, function (i, item) {
                             template += '<option value="' + item.id + '">' + item.name + '</option>';
+                            console.log(template);
                         });
 
                         alert(template);
