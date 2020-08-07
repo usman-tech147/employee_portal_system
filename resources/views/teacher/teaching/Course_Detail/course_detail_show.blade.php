@@ -169,7 +169,7 @@
          * **/
         function getPrograms() {
 
-            alert('get programs works');
+            // alert('get programs works');
             var id = $('#course_level').val();
 
             if (id != 'default') {
@@ -185,7 +185,7 @@
                             template += '<option value="' + item.id + '">' + item.name + '</option>';
                         });
 
-                        alert(template);
+                        // alert(template);
 
                         $('#program').html(template);
                     },
