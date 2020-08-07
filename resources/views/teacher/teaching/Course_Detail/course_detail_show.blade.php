@@ -175,10 +175,11 @@
             alert('get programs works');
             var id = $('#course_level').val();
 
-            alert('course level id: ' + id);
+            // alert('course level id: ' + id);
             if (id != 'default') {
                 var url = '{{route('helper.course_level.programs',":id")}}';
                 url = url.replace(':id', id);
+                alert(url);
                 $.ajax({
                     url: url,
                     type: 'GET',
