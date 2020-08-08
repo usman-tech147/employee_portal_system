@@ -137,7 +137,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapHelperRoutes()
     {
-        Route::middleware(['web','auth'])
+        Route::middleware(['web'])
             ->namespace($this->namespace)
             ->group(base_path('routes/helper.php'));
     }
