@@ -12,7 +12,6 @@
                         <div class="card-header">
                             <h3 class="card-title">User</h3>
                         </div>
-
                         <div class="card-body">
                             <div class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <div class="card-body">
@@ -85,8 +84,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password"
-                                                   placeholder="Password">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="cpassword"> Confirm Password </label>

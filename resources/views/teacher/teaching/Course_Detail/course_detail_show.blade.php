@@ -144,8 +144,6 @@
          * **/
         function getCourseLevel() {
 
-            // alert('get course levels');
-
             var url = '{{route('helper.course_levels')}}';
             $.ajax({
                 url: url,
@@ -171,8 +169,6 @@
          * COURSE DETAIL GET COURSE LEVEL PROGRAMS
          * **/
         function getPrograms() {
-
-            alert('get programs works');
             var id = $('#course_level').val();
 
             // alert('course level id: ' + id);
@@ -185,18 +181,10 @@
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
-
-                        alert("success method: " + url);
-                        console.log("data comming from server ");
-                        console.log(data)
                         var template = '<option value="default">choooose...</option>';
                         $.each(data.programs, function (i, item) {
                             template += '<option value="' + item.id + '">' + item.name + '</option>';
                         });
-
-                        alert('after each loop');
-                        // alert(data.programs[0].id + " " + data.programs[0].name)
-                        // console(id + " " + data.message);
 
                         $('#program').html(template);
                     },
@@ -206,7 +194,6 @@
                 });
             }
             else {
-                alert('get programs else part');
                 var template = '<option value="default">Choose...</option>';
                 $('#program').html(template);
             }

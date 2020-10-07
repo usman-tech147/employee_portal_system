@@ -14,6 +14,9 @@ Route::group(['namespace' => 'HR', 'middleware' => 'role:hr'], function () {
 // department routes
 //user routes
         Route::resource('users', 'UserController');
+        Route::get('all/registered/users', 'UserController@getAllUsers')->name('all.registered.users');
+        Route::get('all/schools', 'UserController@getAllSchools')->name('all.schools');
+        Route::get('school/{id}/departments', 'UserController@getSchoolDepartments')->name('user.school.departments');
         Route::get('users/schools/{id}/departments/', 'UserController@getDepartments')->name('user.departments');
 //user routes
         Route::resource('role', 'RoleController');
