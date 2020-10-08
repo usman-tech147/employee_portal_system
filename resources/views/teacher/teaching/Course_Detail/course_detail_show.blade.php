@@ -11,7 +11,7 @@
         <section>
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title float-left">Category Record</h3>
+                    <h3 class="card-title float-left">Courses Detail</h3>
                     <button class="btn btn-primary float-right" onclick="courseDetailForm()"><i class="fas fa-plus"></i>
                         Course Detail
                     </button>
@@ -205,7 +205,6 @@
          * COURSE DETAIL GET PROGRAM COURSES
          * **/
         function getCourses() {
-            alert('get courses works');
             var id = $('#program').val();
 
             if (id != 'default') {
@@ -229,8 +228,6 @@
                 });
             }
             else {
-
-                alert('get courses else');
                 var template = '<option value="default">Choose...</option>';
                 $('#course_title').html(template);
             }
@@ -389,7 +386,6 @@
                         }
                     });
 
-                    alert(template_2);
                     $('#program').html(template_2);
 
                     courses = data.courses;

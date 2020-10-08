@@ -82,7 +82,6 @@
                     <div class="modal-footer">
                         <input type="hidden" name="hidden_id" id="hidden_id"/>
                         <button type="submit" id="action_btn" class="action btn btn-primary"></button>
-
                     </div>
                 </form>
             </div>

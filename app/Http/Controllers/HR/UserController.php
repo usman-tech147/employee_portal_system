@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Schema;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -83,31 +84,38 @@ class UserController extends Controller
 ////        return response()->json(['data',$departments]);
 //    }
 //
-//    public function store(Request $request)
-//    {
-////        dd($request);
-//        $this->validate($request, [
-//            'first_name' => 'required|string|max:255',
-//            'last_name' => 'required|string|max:255',
-//            'email' => 'required|string|email|max:255|unique:users',
-//            'gender' => 'required|not_in:default',
-//            'school_id' => 'not_in:default',
-//            'department_id' => 'not_in:default',
-//            'password' => 'required|string|min:6|confirmed',
-//        ]);
-//
-//        $request['password'] = bcrypt($request->password);
-//        $user = User::create($request->all());
-//        $user->assignRole($request->role);
+    public function store(Request $request)
+    {
+//        return response()->json(['request' => $request->all()]);
+//        dd($request);
+        $rules =
+            array(
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'gender' => 'required|not_in:default',
+                'school_id' => 'not_in:default',
+                'department_id' => 'not_in:default',
+                'password' => 'required|string|min:6|confirmed',
+            );
+
+        $error = Validator::make($request->all(), $rules);
+        if ($error->fails()) {
+            return response()->json(['errors' => $error->errors()]);
+        }
+        $request['password'] = bcrypt($request->password);
+        $user = new User($request->all());
+        $user->assignRole($request->role);
 //        if($request->role=='teacher')
 //        {
 //            $emp_final = new EmployeeFinalReport();
 //            $emp_final->user_id = $user->id;
 //            $emp_final->save();
 //        }
-////        $user->syncRoles([$request->role]);
-//        $user->save();
+        $user->syncRoles([$request->role]);
+        $user->save();
+        return response()->json(['success' => 'User Saved Successfully']);
 //        return redirect()->route('users.index');
-//    }
+    }
 }
 
