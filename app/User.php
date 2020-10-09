@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Hr\ManageProgram\School;
 use App\Models\Teacher\Advising\BatchAdvising;
+use App\Models\Teacher\InstitutionalEngagement\Committee;
 use App\Models\Teacher\ResearchAndPublications\TravelAndResearch;
 use App\Models\Teacher\Teaching\CourseAssessment;
 use App\Models\Teacher\Teaching\CourseDetail;
@@ -95,5 +96,10 @@ class User extends Authenticatable
     public function travel_and_researches()
     {
         return $this->hasMany(TravelAndResearch::class);
+    }
+
+    public function committees()
+    {
+        return $this->hasMany(Committee::class);
     }
 }
