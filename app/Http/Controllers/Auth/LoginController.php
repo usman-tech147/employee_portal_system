@@ -33,7 +33,6 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-//        dd($_GET['id']);
         return view('auth.login');
     }
     protected function authenticated(Request $request, $user)

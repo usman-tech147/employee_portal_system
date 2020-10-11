@@ -32,26 +32,26 @@ class TravelAndResearchController extends Controller
 
     }
 //
-//    public function store(Request $request)
-//    {
-//        $rules =
-//            array(
-//                'research_type' => 'required|not_in:default',
-//                'funding_agency' => 'required',
-//                'venue' => 'required',
-//                'total_grants' => 'required',
-//                'approval' => 'required',
-//            );
-//        $error = Validator::make($request->all(), $rules);
-//        if ($error->fails()) {
-//            return response()->json(['errors' => $error->errors()]);
-//        }
-//        $travel = new TravelAndResearch($request->all());
-//        $travel->user_id = Auth::user()->id;
-//        $travel->save();
-//
-//        return response()->json(['success' => 'Batch Advising Saved Successfully']);
-//    }
+    public function store(Request $request)
+    {
+        $rules =
+            array(
+                'research_type' => 'required|not_in:default',
+                'funding_agency' => 'required',
+                'venue' => 'required',
+                'total_grants' => 'required',
+                'approval' => 'required',
+            );
+        $error = Validator::make($request->all(), $rules);
+        if ($error->fails()) {
+            return response()->json(['errors' => $error->errors()]);
+        }
+        $travel = new TravelAndResearch($request->all());
+        $travel->user_id = Auth::user()->id;
+        $travel->save();
+
+        return response()->json(['success' => 'travel detail Saved Successfully']);
+    }
 
 //    public function edit($id)
 //    {

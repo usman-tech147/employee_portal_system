@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('designation')->nullable()->default('employee');
             $table->string('gender');
-            $table->integer('school_id')->nullable(true);
+//            $table->integer('school_id')->nullable(true);
             $table->integer('department_id')->nullable(true);
             $table->string('password');
             $table->tinyInteger('status')->default('0');

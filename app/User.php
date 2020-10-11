@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Hr\ManageProgram\Department;
 use App\Models\Hr\ManageProgram\School;
 use App\Models\Teacher\Advising\BatchAdvising;
 use App\Models\Teacher\InstitutionalEngagement\Committee;
@@ -20,7 +21,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable,HasRoles;
+    use Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -29,7 +30,7 @@ class User extends Authenticatable
      */
 
     protected $fillable = [
-        'first_name','last_name','email','designation','gender','school_id','department_id','password',
+        'first_name', 'last_name', 'email', 'designation', 'gender', 'department_id', 'password',
     ];
 
 
@@ -52,9 +53,14 @@ class User extends Authenticatable
     ];
 
 
-    public function school()
+//    public function school()
+//    {
+//        return $this->belongsTo(School::class);
+//    }
+
+    public function department()
     {
-        return $this->belongsTo(School::class);
+        return $this->belongsTo(Department::class);
     }
 
     public function course_details()

@@ -94,7 +94,7 @@ class UserController extends Controller
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'gender' => 'required|not_in:default',
-                'school_id' => 'not_in:default',
+//                'school_id' => 'not_in:default',
                 'department_id' => 'not_in:default',
                 'password' => 'required|string|min:6|confirmed',
             );

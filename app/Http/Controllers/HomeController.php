@@ -27,11 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+//        dd('home index');
         return view('home');
     }
 
     public function back()
     {
+        dd('working');
         if(Auth::user()->roles->pluck('name')[0] == 'teacher')
             return redirect()->route('teacher.dashboard');
         if(Auth::user()->roles->pluck('name')[0] == 'dean')
