@@ -20,8 +20,8 @@
                         <div class="col-md-6 col-sm-6">
                             <h4><strong>Designation:</strong></h4>
                             <h5> {{$user->designation}} </h5>
-                            <h4><strong>School:</strong></h4>
-                            <h5> {{$user->school->name}} </h5>
+                            <h4><strong>Department:</strong></h4>
+                            <h5> {{$user->department->name}} </h5>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     <table class="table">
                         <thead class="thead-dark text-center">
                         <tr>
-                            <th colspan="8"> <h3>Course Details</h3></th>
+                            <th colspan="8"><h3>Course Details</h3></th>
                         </tr>
                         </thead>
                         <thead class="thead-light">
@@ -214,7 +214,7 @@
                     <table class="table">
                         <thead class="thead-dark text-center">
                         <tr>
-                            <th colspan="8"> <h3>Batch Advising</h3></th>
+                            <th colspan="8"><h3>Batch Advising</h3></th>
                         </tr>
                         </thead>
                         <thead class="thead-light">
@@ -250,7 +250,7 @@
                     <table class="table">
                         <thead class="thead-dark text-center">
                         <tr>
-                            <th colspan="8"> <h3>Travel And Research</h3></th>
+                            <th colspan="8"><h3>Travel And Research</h3></th>
                         </tr>
                         </thead>
                         <thead class="thead-light">
@@ -284,7 +284,7 @@
                     <table class="table">
                         <thead class="thead-dark text-center">
                         <tr>
-                            <th colspan="8"> <h3>Committee Work</h3></th>
+                            <th colspan="9"><h3>Committee Work</h3></th>
                         </tr>
                         </thead>
                         <thead class="thead-light">
@@ -321,7 +321,7 @@
                 <form action="{{route('submit.report')}}" method="post">
                     @csrf
                     <div class="card-footer">
-                        <button class="btn btn-primary float-right"> Submit Report </button>
+                        <button class="btn btn-primary float-right"> Submit Report</button>
                     </div>
                 </form>
             </div>

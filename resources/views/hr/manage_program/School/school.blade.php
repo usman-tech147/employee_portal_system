@@ -45,9 +45,27 @@
         /**
          * GET REQUEST FOR COURSE DETAIL
          * **/
+
+        {{--$(document).ready(function() {--}}
+            {{--$.ajax({--}}
+                {{--url: '{{route('all.departments')}}',--}}
+                {{--method: 'GET',--}}
+                {{--contentType: false,--}}
+                {{--cache: false,--}}
+                {{--processData: false,--}}
+                {{--datatype: 'json',--}}
+                {{--success: function (data) {--}}
+                    {{--console.log(data);--}}
+                {{--},--}}
+                {{--error: function (jqxhr, status, exception) {--}}
+                    {{--alert('Exception:', jqxhr);--}}
+                {{--}--}}
+            {{--});--}}
+        {{--});--}}
+
         $('#school_tbl').DataTable({
             processing: true,
-            serverSide: true,
+            // serverSide: true,
             responsive: true,
             autoWidth: false,
             columnDefs:[
@@ -57,7 +75,7 @@
                 }
             ],
             ajax: {
-                url: '{{ route('all.schools') }}',
+                url: '{{route('all.schools')}}',
             },
             columns: [
                 {

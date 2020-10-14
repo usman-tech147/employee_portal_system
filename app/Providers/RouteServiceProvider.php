@@ -55,6 +55,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapHelperRoutes();
 
+        $this->mapReportRoutes();
+
     }
 
     /**
@@ -140,6 +142,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware(['web'])
             ->namespace($this->namespace)
             ->group(base_path('routes/helper.php'));
+    }
+
+    protected function mapReportRoutes()
+    {
+        Route::middleware(['web'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/report.php'));
     }
 
 }
