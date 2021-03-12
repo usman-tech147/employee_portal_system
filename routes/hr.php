@@ -26,5 +26,22 @@ Route::group(['namespace' => 'HR', 'middleware' => 'role:hr'], function () {
         Route::resource('course','CourseController');
         Route::get('all/course','CourseController@getAllCourses')->name('all.courses');
         Route::get('course/all/programs','CourseController@getAllPrograms')->name('course.all.program');
+
+        //report
+        Route::get('/view/teacher','HrController@viewTeacher')->name('hr.teachers.report');
+        Route::get('/view/{id}/teacher-report','HrController@viewTeacherReport')->name('hr.view_teacher.report');
+        Route::get('/return/teacher/{id}','HrController@returnTeacherReport')->name('hr.return.teacher.report');
+
+
+
+
+
+
+
+        Route::post('/mark/report','HrController@saveReportMarks')->name('hr.save_report.marks');
+        Route::get('/edit/report/marks/{id}','HrController@editReportMarks')->name('hr.edit_report.marks');
+        Route::post('/update/report/marks/{id}','HrController@updateReportMarks')->name('hr.update_report.marks');
+        Route::post('/submit/report/{id}/dean','HrController@submitReportToDean')->name('submit.report.dean');
+
     });
 });

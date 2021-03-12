@@ -17,6 +17,7 @@ class DisableLinks
      */
     public function handle($request, Closure $next)
     {
+//        dd('disable link');
         $user = User::find(Auth::user()->id);
         if($user->status == 1){
             return redirect()->back();

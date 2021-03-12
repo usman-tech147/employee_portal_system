@@ -69,11 +69,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('hr.teachers.report')}}" class="nav-link">
                                 <i class="fas fa-history"></i>
                                 <p>
-                                    HR View History
-
+                                    HR View Teachers Report
                                 </p>
                             </a>
                         </li>
@@ -116,9 +115,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('dean.teachers')}}" class="nav-link">
+                            <a href="{{route('dean.teachers.report')}}" class="nav-link">
                                 <i class="far fa-eye"> </i>
-                                <p>DEAN View Teachers</p>
+                                <p>DEAN View Teachers Report</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -174,9 +173,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('teacher.report.dean')}}" class="nav-link">
+                                <a href="{{route('teacher.view.report')}}" class="nav-link">
                                     <i class="fas fa-share"></i>
-                                    <p>Teacher Send Report To Dean</p>
+                                    <p>Teacher View Report</p>
                                 </a>
                             </li>
                         @endif

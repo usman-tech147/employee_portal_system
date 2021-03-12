@@ -24,7 +24,7 @@ class HelperController extends Controller
 
     public function getCourseLevelPrograms($id)
     {
-//        $programs = CourseLevel::find($id)->programs;
+        $programs = CourseLevel::find($id)->programs;
 
 
 //        $programs = CourseLevel::where('id',$id)->programs;
@@ -32,15 +32,15 @@ class HelperController extends Controller
 //        $programs = CourseLevel::with('programs')->where('id', $id)->get();
 //        $programs = Program::all();
 
-        $programs = DB::table('course_levels')
-            ->join('course_level_program',function($query){
-                $id = 1;
-                $query->on('course_levels.id','=','course_level_program.course_level_id')
-                    ->where('course_levels.id', '=', $id);
-            })
-            ->join('programs','programs.id','=','course_level_program.program_id')
-            ->select('programs.id','programs.name')
-            ->get();
+//        $programs = DB::table('course_levels')
+//            ->join('course_level_program',function($query){
+//                $id = 1;
+//                $query->on('course_levels.id','=','course_level_program.course_level_id')
+//                    ->where('course_levels.id', '=', $id);
+//            })
+//            ->join('programs','programs.id','=','course_level_program.program_id')
+//            ->select('programs.id','programs.name')
+//            ->get();
 //
 //        return $programs;
 

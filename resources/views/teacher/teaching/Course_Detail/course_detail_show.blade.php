@@ -181,6 +181,7 @@
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
+                        console.log(data.programs)
                         var template = '<option value="default">choooose...</option>';
                         $.each(data.programs, function (i, item) {
                             template += '<option value="' + item.id + '">' + item.name + '</option>';
@@ -251,7 +252,6 @@
          * **/
         $('#course_detail_form').submit(function (e) {
             if ($('.action').attr('id') == 'store') {
-
                 formdata = new FormData(this);
                 formdata.set('course_level', $('#course_level option:selected').text());
                 formdata.set('program', $('#program option:selected').text());
